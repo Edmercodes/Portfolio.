@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills & Hobbies</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav {
+      background-color: var(--blue-5);
+      padding: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .nav a {
+      text-decoration: none;
+      background-color: white;
+      color: var(--blue-4);
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      border: 2px solid var(--blue-4);
+      transition: 0.3s;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .nav a:hover {
+      background-color: var(--blue-4);
+      color: white;
+    }
+
+    .skills-hobbies-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    .skills-hobbies-container h2 {
+      color: var(--blue-5);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .category {
+      margin-bottom: 2rem;
+    }
+
+    .category h3 {
+      color: var(--blue-4);
+      margin-bottom: 0.5rem;
+    }
+
+    .list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .list span {
+      background-color: var(--blue-1);
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #222;
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav a {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="education.html">Education</a>
+    <a href="project.html">Project</a>
+    <a href="certifications.html">Certifications</a>
+  </div>
+
+  <section class="skills-hobbies-container">
+    <h2>🛠 Skills & Hobbies</h2>
+
+    <div class="category">
+      <h3>Technical & Creative Skills</h3>
+      <div class="list">
+        <span>Computer Literate</span>
+        <span>Front-End Development</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>Photo Editing</span>
+        <span>Painting</span>
+        <span>Drawing</span>
+      </div>
+    </div>
+
+    <div class="category">
+      <h3>Personal Interests</h3>
+      <div class="list">
+        <span>🎨 Drawing</span>
+        <span>🎸 Playing Guitar</span>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

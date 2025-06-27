@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav {
+      background-color: var(--blue-5);
+      padding: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .nav a {
+      text-decoration: none;
+      background-color: white;
+      color: var(--blue-4);
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      border: 2px solid var(--blue-4);
+      transition: 0.3s;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .nav a:hover {
+      background-color: var(--blue-4);
+      color: white;
+    }
+
+    .project-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    .project-container h2 {
+      color: var(--blue-5);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .project-box {
+      background-color: #f9f9f9;
+      padding: 1.5rem;
+      border-left: 5px solid var(--blue-4);
+      border-radius: 8px;
+    }
+
+    .project-box h3 {
+      margin: 0;
+      color: var(--blue-5);
+      font-size: 1.3rem;
+    }
+
+    .project-box p {
+      margin-top: 0.5rem;
+      color: #444;
+    }
+
+    .tech-list {
+      margin-top: 1rem;
+    }
+
+    .tech-list span {
+      display: inline-block;
+      background-color: var(--blue-1);
+      color: #222;
+      padding: 0.4rem 0.8rem;
+      margin: 0.2rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    .poster-button {
+      margin-top: 1.5rem;
+      display: inline-block;
+      background-color: var(--blue-4);
+      color: white;
+      padding: 0.6rem 1.4rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .poster-button:hover {
+      background-color: var(--blue-5);
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav a {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="education.html">Education</a>
+    <a href="certifications.html">Certifications</a>
+    <a href="skills.html">Skills</a>
+  </div>
+
+  <section class="project-container">
+    <h2>🚀 Featured Project</h2>
+
+    <div class="project-box">
+      <h3>AquaTrack</h3>
+      <p>An AI-integrated mobile and web system for water refilling station management in Butuan City. This system enhances inventory tracking, container detection, and customer interaction using modern technologies.</p>
+
+      <div class="tech-list">
+        <span>Supabase</span>
+        <span>React</span>
+        <span>React Native</span>
+        <span>TensorFlow</span>
+        <span>YOLOv5</span>
+        <span>PyTorch</span>
+      </div>
+
+      <a href="poster.html" class="poster-button">📄 View Poster</a>
+    </div>
+  </section>
+</body>
+</html>
