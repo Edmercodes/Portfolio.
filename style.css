@@ -132,7 +132,8 @@ html {
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .card img {
@@ -174,6 +175,27 @@ html {
     flex-direction: column;
     align-items: center;
   }
+}
+.back-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--blue-4);
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+.back-top:hover { background-color: var(--blue-5); }
+section {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1s ease forwards;
+}
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
 }
 
 main {
@@ -227,3 +249,7 @@ footer {
     padding: 1.5rem;
   }
 }
+<meta property="og:title" content="Edmer John D. Pino | Front-End Developer">
+<meta property="og:description" content="Portfolio of Edmer Pino – front-end developer and creative designer.">
+<meta property="og:image" content="preview.png">
+
