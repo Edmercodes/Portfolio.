@@ -50,6 +50,13 @@ header p {
   color: #4b4b4b;
   letter-spacing: 1px;
 }
+.intro {
+  max-width: 600px;
+  margin: 0.5rem auto 0;
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
 .nav {
   margin-top: 2rem;
   display: flex;
