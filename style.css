@@ -231,10 +231,12 @@ ul {
 footer {
   text-align: center;
   padding: 1rem;
-  background-color: var(--blue-5);
+  background: linear-gradient(135deg, var(--blue-5), var(--blue-3));
   color: white;
   margin-top: 2rem;
+  box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.1);
 }
+
 .cert-img:hover, .poster-img:hover {
   transform: scale(1.02);
   transition: transform 0.3s ease;
