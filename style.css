@@ -44,6 +44,13 @@ header p {
   font-size: 1.1rem;
 }
 
+.tagline {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 1.3rem;
+  color: #4b4b4b;
+  letter-spacing: 1px;
+}
+
 .nav {
   margin-top: 2rem;
   display: flex;
