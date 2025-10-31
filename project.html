@@ -3,148 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project</title>
+  <title>Project | Edmer Pino</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav {
-      background-color: var(--blue-5);
-      padding: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    .nav a {
-      text-decoration: none;
-      background-color: white;
-      color: var(--blue-4);
-      padding: 0.6rem 1.2rem;
-      border-radius: 5px;
-      border: 2px solid var(--blue-4);
-      transition: 0.3s;
-      font-weight: 600;
-      font-size: 1rem;
-    }
-
-    .nav a:hover {
-      background-color: var(--blue-4);
-      color: white;
-    }
-
     .project-container {
-      background: white;
+      max-width: 900px;
+      margin: 2rem auto;
       padding: 2rem;
+      background: white;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      max-width: 800px;
-      margin: 2rem auto;
+      animation: fadeIn 1s ease forwards;
     }
 
     .project-container h2 {
       color: var(--blue-5);
-      margin-bottom: 1.5rem;
       text-align: center;
+      margin-bottom: 1.5rem;
     }
 
-    .project-box {
-      background-color: #f9f9f9;
-      padding: 1.5rem;
-      border-left: 5px solid var(--blue-4);
-      border-radius: 8px;
-      margin-bottom: 2rem;
-    }
-
-    .project-box h3 {
-      margin: 0;
-      color: var(--blue-5);
-      font-size: 1.3rem;
-    }
-
-    .project-box p {
-      margin-top: 0.5rem;
-      color: #444;
-    }
-
-    .tech-list {
-      margin-top: 1rem;
-    }
-
-    .tech-list span {
-      display: inline-block;
+    .project-card {
       background-color: var(--blue-1);
+      border-left: 6px solid var(--blue-4);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .project-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .project-card img:hover {
+      transform: scale(1.03);
+    }
+
+    .project-card h3 {
+      color: var(--blue-4);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card p {
+      color: #333;
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .tech-stack span {
+      background-color: var(--blue-3);
       color: #222;
       padding: 0.4rem 0.8rem;
-      margin: 0.2rem;
-      border-radius: 20px;
+      border-radius: 15px;
       font-size: 0.9rem;
+      font-weight: 500;
     }
 
-    .poster-button {
-      margin-top: 1.5rem;
+    .view-btn {
       display: inline-block;
       background-color: var(--blue-4);
       color: white;
-      padding: 0.6rem 1.4rem;
-      border-radius: 5px;
       text-decoration: none;
-      font-weight: bold;
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      margin-top: 1rem;
       transition: 0.3s;
-      margin-right: 1rem;
+      font-weight: 600;
     }
 
-    .poster-button:hover {
+    .view-btn:hover {
       background-color: var(--blue-5);
     }
 
-    @media (max-width: 600px) {
-      .nav {
-        flex-direction: column;
-        align-items: center;
-      }
+    footer {
+      margin-top: 3rem;
+    }
 
-      .nav a {
-        width: 100%;
-        text-align: center;
+    @media (max-width: 600px) {
+      .project-container {
+        padding: 1.5rem;
+        margin: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="nav">
-    <a href="index.html">🏠 Home</a>
-    <a href="education.html">Education</a>
-    <a href="certifications.html">Certifications</a>
-    <a href="skills.html">Skills & Hobbies</a>
-  </div>
+  <header>
+    <div class="photo-border">
+      <img src="edbarong.jpg" alt="Your Photo">
+    </div>
+    <h1>Edmer John D. Pino</h1>
+    <p class="tagline">Front-End Developer & Creative Designer passionate about crafting visually engaging and user-friendly experiences.</p>
+    <div class="nav">
+      <a href="index.html">🏠 Home</a>
+      <a href="education.html">Education</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="skills.html">Skills & Hobbies</a>
+    </div>
+  </header>
 
   <section class="project-container">
-    <h2>🚀 Featured Project</h2>
+    <h2>💡 Featured Project</h2>
 
-    <div class="project-box">
-      <h3>AquaTrack</h3>
-      <p>An AI-integrated mobile and web system for water refilling station management in Butuan City. This system enhances inventory tracking, container detection, and customer interaction using modern technologies.</p>
-
-      <div class="tech-list">
-        <span>Supabase</span>
+    <div class="project-card">
+      <img src="aquatrackposter.png" alt="AquaTrack Poster">
+      <h3>AquaTrack: AI-Integrated Mobile App and Web System</h3>
+      <p>
+        A capstone project developed for <strong>Caraga State University</strong> that modernizes water refilling station operations in Butuan City. 
+        AquaTrack combines a React Native mobile app, a React web system, and an AI-powered detection model to manage inventory and track gallon containers efficiently.
+      </p>
+      <p>
+        The system enables real-time monitoring, demand forecasting, and automated data management through an integrated backend powered by Supabase and Python-based AI detection.
+      </p>
+      <div class="tech-stack">
         <span>React</span>
         <span>React Native</span>
+        <span>Supabase</span>
+        <span>Python</span>
         <span>TensorFlow</span>
-        <span>YOLOv5</span>
-        <span>PyTorch</span>
+        <span>Flask API</span>
       </div>
-
-      <a href="poster.html" class="poster-button">📄 View Poster</a>
-      <a href="artworks.html" class="poster-button">🎨 View Artworks</a>
+      <a href="aquatrackdetails.html" class="view-btn">🔍 View Full Details</a>
     </div>
   </section>
+
+  <footer>
+    &copy; 2025 Edmer John D. Pino. All rights reserved.
+  </footer>
 </body>
-<footer>
-  &copy; 2025 Edmer John D. Pino. All rights reserved.
-</footer>
 </html>
