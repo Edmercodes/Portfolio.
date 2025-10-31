@@ -3,113 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Education</title>
-  <link rel="icon" href="favicon.png" type="image/png">
+  <title>Education | Edmer Pino</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav {
-      background-color: var(--blue-5);
-      padding: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    .nav a {
-      text-decoration: none;
-      background-color: white;
-      color: var(--blue-4);
-      padding: 0.6rem 1.2rem;
-      border-radius: 5px;
-      border: 2px solid var(--blue-4);
-      transition: 0.3s;
-      font-weight: 600;
-      font-size: 1rem;
-    }
-
-    .nav a:hover {
-      background-color: var(--blue-4);
-      color: white;
-    }
-
-    .edu-container {
+    .education-container {
+      max-width: 800px;
+      margin: 2rem auto;
       background: white;
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      max-width: 800px;
-      margin: 2rem auto;
+      animation: fadeIn 1s ease forwards;
     }
 
-    .edu-container h2 {
+    .education-container h2 {
       color: var(--blue-5);
-      margin-bottom: 1.5rem;
       text-align: center;
+      margin-bottom: 2rem;
     }
 
-    .edu-item {
+    .edu-card {
+      background-color: var(--blue-1);
+      border-left: 6px solid var(--blue-4);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
       margin-bottom: 1.5rem;
-      padding: 1rem;
-      border-left: 5px solid var(--blue-4);
-      background-color: #f9f9f9;
-      border-radius: 6px;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .edu-item h3 {
-      margin: 0;
+    .edu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .edu-card h3 {
+      color: var(--blue-4);
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-card p {
+      margin: 0.2rem 0;
+      color: #333;
+    }
+
+    .edu-card span {
+      font-weight: bold;
       color: var(--blue-5);
-      font-size: 1.2rem;
     }
 
-    .edu-item p {
-      margin: 0.2rem 0 0;
-      color: #444;
+    footer {
+      margin-top: 3rem;
     }
 
     @media (max-width: 600px) {
-      .nav {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .nav a {
-        width: 100%;
-        text-align: center;
+      .education-container {
+        padding: 1.5rem;
+        margin: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="nav">
-    <a href="index.html">🏠 Home</a>
-    <a href="project.html">Project</a>
-    <a href="certifications.html">Certifications</a>
-    <a href="skills.html">Skills</a>
-  </div>
-
-  <section class="edu-container">
-    <h2>🎓 My Educational Background</h2>
-
-    <div class="edu-item">
-      <h3>Caraga State University</h3>
-      <p>Bachelor of Science in Information Systems</p>
-      <p>2021 – 2025</p>
+  <header>
+    <div class="photo-border">
+      <img src="edbarong.jpg" alt="Your Photo">
     </div>
-
-    <div class="edu-item">
-      <h3>Our Lady of Carmen Academy of Caraga Inc.</h3>
-      <p>Junior and Senior High School</p>
-      <p>2014 – 2020</p>
+    <h1>Edmer John D. Pino</h1>
+    <p class="tagline">Front-End Developer & Creative Designer passionate about crafting visually engaging and user-friendly experiences.</p>
+    <div class="nav">
+      <a href="index.html">🏠 Home</a>
+      <a href="project.html">Project</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="skills.html">Skills & Hobbies</a>
     </div>
-  </section>
-</body>
-<footer>
-  &copy; 2025 Edmer John D. Pino. All rights reserved.
-</footer>
-</html>
+  </header>
+
+  <section class="education-container">
+    <h2>🎓 Education Background</h2>
+
+    <div class="edu-card">
+      <h3>Bachelor of Science in Information Systems</h3>
+      <p><span>Caraga State University – Main Campus</span></p
