@@ -24,6 +24,7 @@ header {
   background: var(--blue-5);
   color: white;
   padding: 3rem 1rem;
+  background: linear-gradient(135deg, var(--blue-5), var(--blue-3));
 }
 
 header img {
