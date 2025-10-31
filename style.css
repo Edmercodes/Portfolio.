@@ -92,3 +92,17 @@ footer {
   color: white;
   margin-top: 2rem;
 }
+.cert-img:hover, .poster-img:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+  main, .project-container, .skills-hobbies-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
