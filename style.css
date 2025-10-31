@@ -50,18 +50,6 @@ header p {
   color: #4b4b4b;
   letter-spacing: 1px;
 }
-.btn {
-  display: inline-block;
-  background-color: var(--blue-4);
-  color: white;
-  padding: 0.8rem 1.6rem;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: 0.3s;
-  margin-top: 1rem;
-}
-.btn:hover { background-color: var(--blue-5); }
-
 .nav {
   margin-top: 2rem;
   display: flex;
