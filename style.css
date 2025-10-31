@@ -25,6 +25,8 @@ header {
   color: white;
   padding: 3rem 1rem;
   background: linear-gradient(135deg, var(--blue-5), var(--blue-3));
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
 }
 
 header img {
@@ -38,10 +40,16 @@ header img {
 
 header h1 {
   font-size: 2.5rem;
+  background: linear-gradient(to right, var(--blue-3), white);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 header p {
   font-size: 1.1rem;
+}
+html {
+  scroll-behavior: smooth;
 }
 
 .tagline {
@@ -184,6 +192,18 @@ h2 {
 
 ul {
   padding-left: 1.5rem;
+}
+
+.contacts h2 {
+  margin-bottom: 0.8rem;
+  color: var(--blue-5);
+}
+.contacts p {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+.contacts a {
+  font-size: 1.1rem;
 }
 
 footer {
