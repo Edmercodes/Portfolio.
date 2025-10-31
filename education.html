@@ -4,95 +4,134 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Education | Edmer Pino</title>
+  <link rel="icon" href="favicon.png" type="image/png">
   <link rel="stylesheet" href="style.css">
   <style>
-    .education-container {
-      max-width: 800px;
-      margin: 2rem auto;
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--blue-1);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .nav {
+      background: linear-gradient(135deg, var(--blue-5), var(--blue-3));
+      padding: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .nav a {
+      text-decoration: none;
+      background-color: white;
+      color: var(--blue-4);
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      border: 2px solid var(--blue-4);
+      transition: 0.3s;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .nav a:hover {
+      background-color: var(--blue-4);
+      color: white;
+    }
+
+    .edu-container {
       background: white;
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 2rem auto;
       animation: fadeIn 1s ease forwards;
     }
 
-    .education-container h2 {
+    .edu-container h2 {
       color: var(--blue-5);
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .edu-card {
-      background-color: var(--blue-1);
-      border-left: 6px solid var(--blue-4);
-      border-radius: 8px;
-      padding: 1rem 1.5rem;
       margin-bottom: 1.5rem;
-      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
     }
 
-    .edu-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    .edu-item {
+      margin-bottom: 1.5rem;
+      padding: 1rem 1.5rem;
+      border-left: 5px solid var(--blue-4);
+      background-color: #f9f9f9;
+      border-radius: 6px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .edu-card h3 {
-      color: var(--blue-4);
-      margin-bottom: 0.3rem;
+    .edu-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
-    .edu-card p {
-      margin: 0.2rem 0;
-      color: #333;
-    }
-
-    .edu-card span {
-      font-weight: bold;
+    .edu-item h3 {
+      margin: 0;
       color: var(--blue-5);
+      font-size: 1.3rem;
+    }
+
+    .edu-item p {
+      margin: 0.3rem 0 0;
+      color: #444;
+      font-size: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     footer {
-      margin-top: 3rem;
+      text-align: center;
+      padding: 1rem;
+      background-color: var(--blue-5);
+      color: white;
+      margin-top: 2rem;
+      font-size: 0.9rem;
     }
 
     @media (max-width: 600px) {
-      .education-container {
-        padding: 1.5rem;
-        margin: 1rem;
+      .nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      .nav a {
+        width: 100%;
+        text-align: center;
+      }
+      .edu-item {
+        padding: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="photo-border">
-      <img src="edbarong.jpg" alt="Your Photo">
-    </div>
-    <h1>Edmer John D. Pino</h1>
-    <p class="tagline">Front-End Developer & Creative Designer passionate about crafting visually engaging and user-friendly experiences.</p>
-    <div class="nav">
-      <a href="index.html">🏠 Home</a>
-      <a href="project.html">Project</a>
-      <a href="certifications.html">Certifications</a>
-      <a href="skills.html">Skills & Hobbies</a>
-    </div>
-  </header>
+  <div class="nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="project.html">Project</a>
+    <a href="certifications.html">Certifications</a>
+    <a href="skills.html">Skills</a>
+  </div>
 
-  <section class="education-container">
-    <h2>🎓 Education Background</h2>
+  <section class="edu-container">
+    <h2>🎓 My Educational Background</h2>
 
-    <div class="edu-card">
-      <h3>Bachelor of Science in Information Systems</h3>
-      <p><span>Caraga State University – Main Campus</span></p>
-      <p>Butuan City | 2020 – 2024</p>
-      <p>Focused on information systems development, project management, and front-end design using modern technologies.</p>
+    <div class="edu-item">
+      <h3>Caraga State University – Main Campus</h3>
+      <p><strong>Bachelor of Science in Information Systems</strong></p>
+      <p>2021 – 2025</p>
     </div>
 
-    <div class="edu-card">
-      <h3>Senior High School (ICT Strand)</h3>
-      <p><span>Agusan National High School</span></p>
-      <p>Butuan City | 2018 – 2020</p>
-      <p>Learned core computer skills, programming basics, and multimedia design fundamentals.</p>
+    <div class="edu-item">
+      <h3>Our Lady of Carmen Academy of Caraga Inc.</h3>
+      <p>Junior and Senior High School</p>
+      <p>2014 – 2020</p>
     </div>
   </section>
 
