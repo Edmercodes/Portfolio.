@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav {
+      background: linear-gradient(135deg, var(--blue-5), var(--blue-4));
+      padding: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .nav a {
+      text-decoration: none;
+      background-color: white;
+      color: var(--blue-4);
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      border: 2px solid var(--blue-4);
+      transition: 0.3s;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .nav a:hover {
+      background-color: var(--blue-4);
+      color: white;
+    }
+
+    .resume-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .resume-container h2 {
+      color: var(--blue-5);
+      margin-bottom: 1rem;
+    }
+
+    .resume-container img {
+      width: 100%;
+      max-width: 750px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      margin-top: 1.5rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .resume-container img:hover {
+      transform: scale(1.02);
+    }
+
+    /* Fullscreen overlay */
+    .overlay {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      touch-action: none; /* enables pinch zoom on mobile */
+    }
+
+    .overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      transform-origin: center center;
+      transition: transform 0.1s ease-out;
+    }
+
+    .overlay span {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .overlay span:hover {
+      color: var(--blue-3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--blue-5), var(--blue-4));
+      color: white;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav a {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="education.html">Education</a>
+    <a href="project.html">Project</a>
+    <a href="certifications.html">Certifications</a>
+    <a href="skills.html">Skills</a>
+    <a href="resume.html">Resume</a>
+  </div>
+
+  <section class="resume-container">
+    <h2>📄 My Resume</h2>
+    <p style="color:#444;">Click to view fullscreen (pinch/zoom supported)</p>
+    <img src="Edmer_Resume.jpg" alt="Edmer John D. Pino Resume" id="resumeImg">
+  </section>
+
+  <!-- Fullscreen overlay -->
+  <div class="overlay" id="overlay">
+    <span id="closeBtn">&times;</span>
+    <img src="Edmer_Resume.jpg" alt="Fullscreen Resume" id="overlayImg">
+  </div>
+
+  <footer>
+    &copy; 2025 Edmer John D. Pino. All rights reserved.
+  </footer>
+
+  <script>
+    const resumeImg = document.getElementById("resumeImg");
+    const overlay = document.getElementById("overlay");
+    const overlayImg = document.getElementById("overlayImg");
+    const closeBtn = document.getElementById("closeBtn");
+
+    let scale = 1;
+    let startDist = 0;
+
+    // Open overlay
+    resumeImg.addEventListener("click", () => {
+      overlay.style.display = "flex";
+      scale = 1;
+      overlayImg.style.transform = `scale(${scale})`;
+    });
+
+    // Close overlay
+    closeBtn.addEventListener("click", () => overlay.style.display = "none");
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) overlay.style.display = "none"; });
+
+    // Zoom with mouse wheel (desktop)
+    overlay.addEventListener("wheel", e => {
+      e.preventDefault();
+      scale += e.deltaY * -0.001;
+      scale = Math.min(Math.max(.5, scale), 3);
+      overlayImg.style.transform = `scale(${scale})`;
+    });
+
+    // Pinch zoom (mobile)
+    overlay.addEventListener("touchstart", e => {
+      if (e.touches.length === 2) {
+        startDist = Math.hypot(
+          e.touches[0].pageX - e.touches[1].pageX,
+          e.touches[0].pageY - e.touches[1].pageY
+        );
+      }
+    });
+
+    overlay.addEventListener("touchmove", e => {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const currentDist = Math.hypot(
+          e.touches[0].pageX - e.touches[1].pageX,
+          e.touches[0].pageY - e.touches[1].pageY
+        );
+        scale *= currentDist / startDist;
+        scale = Math.min(Math.max(.5, scale), 3);
+        overlayImg.style.transform = `scale(${scale})`;
+        startDist = currentDist;
+      }
+    });
+  </script>
+</body>
+</html>
