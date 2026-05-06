@@ -380,6 +380,64 @@ body.dark-mode select:focus {
 * {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+
+/* ===== DARK MODE FOR SPECIFIC PAGES ===== */
+
+/* Project page */
+body.dark-mode .cert-container {
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .cert-container h2,
+body.dark-mode .cert-container h3 {
+  color: #64b5f6;
+}
+
+body.dark-mode .cert-container p {
+  color: #ffffff;
+}
+
+/* Resume page */
+body.dark-mode .resume-container {
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .resume-container h2,
+body.dark-mode .resume-container h3 {
+  color: #64b5f6;
+}
+
+body.dark-mode .resume-container p {
+  color: #ffffff;
+}
+
+body.dark-mode .resume-container ul li {
+  color: #ffffff;
+}
+
+/* About me and intro paragraphs */
+body.dark-mode .about-me p,
+body.dark-mode .intro p {
+  color: #ffffff;
+}
+
+/* Dark mode for navigation on all pages */
+body.dark-mode .nav {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+body.dark-mode .nav a {
+  background-color: #222;
+  color: #64b5f6;
+  border-color: #64b5f6;
+}
+
+body.dark-mode .nav a:hover {
+  background-color: #64b5f6;
+  color: #0a0a0a;
+}
 <meta property="og:title" content="Edmer John D. Pino | Front-End Developer">
 <meta property="og:description" content="Portfolio of Edmer Pino – front-end developer and creative designer.">
 <meta property="og:image" content="preview.png">
