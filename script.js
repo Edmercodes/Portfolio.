@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const loginModal = document.getElementById('loginModal');
   let userRole = 'guest';
   const ADMIN_PASSWORD = '0000';
-  const savedRole = sessionStorage.getItem('userRole');
+  const savedRole = localStorage.getItem('userRole');
 
   if (authModal) {
     const guestBtn = document.getElementById('guestAuthBtn');
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     guestBtn.onclick = function(e) {
       e.preventDefault();
       userRole = 'guest';
-      sessionStorage.setItem('userRole', 'guest');
+      localStorage.setItem('userRole', 'guest');
       showUserView();
       return false;
     };
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       if (passwordInput.value === ADMIN_PASSWORD) {
         userRole = 'admin';
-        sessionStorage.setItem('userRole', 'admin');
+        localStorage.setItem('userRole', 'admin');
         showUserView();
       } else {
         alert('Incorrect password. Use 0000 for admin.');
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     logoutBtn.onclick = function(e) {
       e.preventDefault();
-      sessionStorage.removeItem('userRole');
+      localStorage.removeItem('userRole');
       userRole = 'guest';
       showAuthView();
       return false;
@@ -129,18 +129,41 @@ document.addEventListener('DOMContentLoaded', function() {
   const roleDisplay = document.getElementById('roleDisplay');
   const logoutBtnArtworks = document.getElementById('logoutBtn');
   const uploadBtn = document.getElementById('upload-btn');
+  const galleryContainers = document.querySelectorAll('.gallery .image-container');
+
+  function updateAdminVisibility() {
+    if (uploadBtn) {
+      uploadBtn.style.display = userRole === 'admin' ? 'block' : 'none';
+    }
+
+    galleryContainers.forEach(container => {
+      if (userRole === 'admin') {
+        container.classList.add('admin');
+      } else {
+        container.classList.remove('admin');
+      }
+
+      const deleteBtn = container.querySelector('.delete-btn');
+      if (deleteBtn) {
+        deleteBtn.style.display = userRole === 'admin' ? '' : 'none';
+      }
+    });
+  }
+
+  if (savedRole) {
+    updateAdminVisibility();
+  } else if (uploadBtn) {
+    uploadBtn.style.display = 'none';
+  }
 
   if (userInfo && roleDisplay && logoutBtnArtworks) {
     if (savedRole) {
       userInfo.style.display = 'flex';
       roleDisplay.textContent = userRole === 'admin' ? 'Admin' : 'Guest';
     }
-    if (uploadBtn) {
-      uploadBtn.style.display = userRole === 'admin' ? 'block' : 'none';
-    }
 
     logoutBtnArtworks.onclick = function() {
-      sessionStorage.removeItem('userRole');
+      localStorage.removeItem('userRole');
       userRole = 'guest';
       location.reload(); // Reload to update all button visibilities
     };
@@ -166,9 +189,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Add zoom functionality to existing images
+  // Initialize existing images and container buttons
   const galleryImages = document.querySelectorAll('.gallery img');
-  galleryImages.forEach(addZoomFunctionality);
+  galleryImages.forEach((img, index) => {
+    addZoomFunctionality(img);
+    const container = img.closest('.image-container');
+    addDownloadFunctionality(img, index, container);
+
+    if (container) {
+      const deleteBtn = container.querySelector('.delete-btn');
+      if (deleteBtn) {
+        deleteBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (confirm('Are you sure you want to delete this image?')) {
+            container.remove();
+          }
+        });
+      }
+    }
+  });
 
   // Close modal
   closeBtn.addEventListener('click', function() {
@@ -277,7 +316,20 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Function to add download functionality to an image
-  function addDownloadFunctionality(img, index) {
+  function addDownloadFunctionality(img, index, existingWrapper) {
+    let wrapper = existingWrapper || img.closest('.image-container');
+    let createdWrapper = false;
+
+    if (!wrapper) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'image-container';
+      wrapper.style.position = 'relative';
+      wrapper.style.display = 'inline-block';
+      img.parentNode.insertBefore(wrapper, img);
+      wrapper.appendChild(img);
+      createdWrapper = true;
+    }
+
     const downloadBtn = document.createElement('button');
     downloadBtn.textContent = '⬇️';
     downloadBtn.className = 'download-btn';
@@ -304,47 +356,60 @@ document.addEventListener('DOMContentLoaded', function() {
       document.body.removeChild(link);
     });
 
-    // Create delete button for admin
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = '🗑️';
-    deleteBtn.className = 'delete-btn';
-    deleteBtn.style.position = 'absolute';
-    deleteBtn.style.top = '10px';
-    deleteBtn.style.right = '50px';
-    deleteBtn.style.background = 'rgba(255, 59, 48, 0.9)';
-    deleteBtn.style.color = 'white';
-    deleteBtn.style.border = 'none';
-    deleteBtn.style.borderRadius = '50%';
-    deleteBtn.style.width = '30px';
-    deleteBtn.style.height = '30px';
-    deleteBtn.style.cursor = 'pointer';
-    deleteBtn.style.display = userRole === 'admin' ? 'block' : 'none';
-    deleteBtn.style.zIndex = '10';
-
-    deleteBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (confirm('Are you sure you want to delete this image?')) {
-        wrapper.remove();
-      }
-    });
-
-    // Create wrapper for relative positioning
-    const wrapper = document.createElement('div');
-    wrapper.style.position = 'relative';
-    wrapper.style.display = 'inline-block';
-    img.parentNode.insertBefore(wrapper, img);
-    wrapper.appendChild(img);
     wrapper.appendChild(downloadBtn);
-    wrapper.appendChild(deleteBtn);
 
-    // Show buttons on hover
-    wrapper.addEventListener('mouseenter', function() {
-      downloadBtn.style.display = 'block';
-    });
+    if (createdWrapper) {
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '✖';
+      deleteBtn.className = 'delete-btn';
+      deleteBtn.style.position = 'absolute';
+      deleteBtn.style.top = '8px';
+      deleteBtn.style.left = '8px';
+      deleteBtn.style.background = 'rgba(255, 59, 48, 0.9)';
+      deleteBtn.style.color = 'white';
+      deleteBtn.style.border = 'none';
+      deleteBtn.style.borderRadius = '50%';
+      deleteBtn.style.width = '30px';
+      deleteBtn.style.height = '30px';
+      deleteBtn.style.cursor = 'pointer';
+      deleteBtn.style.display = userRole === 'admin' ? '' : 'none';
+      deleteBtn.style.zIndex = '10';
 
-    wrapper.addEventListener('mouseleave', function() {
-      downloadBtn.style.display = 'none';
-    });
+      deleteBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (confirm('Are you sure you want to delete this image?')) {
+          wrapper.remove();
+        }
+      });
+
+      wrapper.appendChild(deleteBtn);
+
+      wrapper.addEventListener('mouseenter', function() {
+        downloadBtn.style.display = 'block';
+      });
+
+      wrapper.addEventListener('mouseleave', function() {
+        downloadBtn.style.display = 'none';
+      });
+    } else {
+      const existingDeleteBtn = wrapper.querySelector('.delete-btn');
+      if (existingDeleteBtn) {
+        existingDeleteBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (confirm('Are you sure you want to delete this image?')) {
+            wrapper.remove();
+          }
+        });
+      }
+
+      wrapper.addEventListener('mouseenter', function() {
+        downloadBtn.style.display = 'block';
+      });
+
+      wrapper.addEventListener('mouseleave', function() {
+        downloadBtn.style.display = 'none';
+      });
+    }
   }
 
   // Add download functionality to existing images

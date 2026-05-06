@@ -173,14 +173,40 @@
     .delete-btn:hover {
       background-color: rgba(255, 0, 0, 0.9) !important;
     }
+    .image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-container img {
+  display: block;
+  border-radius: 8px;
+}
+
+/* Position delete button on top-left */
+.delete-btn {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: rgba(255, 59, 48, 0.9);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  display: none;
+}
+
+/* Show button on hover only for admin */
+.image-container.admin:hover .delete-btn {
+  display: block;
+}
   </style>
 </head>
 <body>
-  <!-- User Info Bar -->
-  <div class="user-info" id="userInfo" style="display: none;">
-    <span>Role: <span id="roleDisplay">Guest</span></span>
-    <button class="logout-btn" id="logoutBtn">Logout</button>
-  </div>
+  
 
   <h2>🎨 My Artworks</h2>
 
@@ -191,21 +217,66 @@
   </div>
 
   <div class="gallery">
-    <img src="IMG20210407103721.jpg" alt="Artwork 0">
-    <img src="IMG20220125143931.jpg" alt="Artwork 1">
-    <img src="IMG20220413123459.jpg" alt="Artwork 2">
-    <img src="IMG20230603083344.jpg" alt="Artwork 3">
-    <img src="IMG20230618110003.jpg" alt="Artwork 4">
-    <img src="IMG20240626121345.jpg" alt="Artwork 5">
-    <img src="Picsart_24-07-25_16-15-31-017.jpg" alt="Artwork 6">
-    <img src="Picsart_24-04-21_11-48-12-731.jpg" alt="Artwork 7">
-    <img src="Picsart_23-09-03_12-09-16-930.jpg" alt="Artwork 8">
-    <img src="PicsArt_11-07-02.31.43.jpg" alt="Artwork 9">
-    <img src="PicsArt_11-06-05.08.10.jpg" alt="Artwork 10">
-    <img src="PicsArt_11-05-05.07.36.jpg" alt="Artwork 11">
-    <img src="Picsart_25-09-20_11-54-25-309.jpg" alt="Artwork 12">
-    <img src="Picsart_25-10-12_14-39-49-854.jpg" alt="Artwork 13">
-    <img src="Picsart_25-10-25_13-31-13-084.jpg" alt="Artwork 14">
+    <div class="image-container">
+      <img src="art1.jpg" alt="Artwork 0">
+      <button class="delete-btn">✖</button>
+    </div>
+    
+    <div class="image-container">
+      <img src="artwork1.jpg" alt="Artwork 1">
+      <button class="delete-btn">✖</button>
+    </div>
+
+    <div class="image-container">
+      <img src="artwork2.jpg" alt="Artwork 2">
+      <button class="delete-btn">✖</button>
+    </div>
+
+    <div class="image-container">
+      <img src="artwork3.jpg" alt="Artwork 3">
+      <button class="delete-btn">✖</button>
+    </div>
+      
+    <div class="image-container">
+      <img src="artwork4.jpg" alt="Artwork 4">
+      <button class="delete-btn">✖</button>
+    </div>
+
+    <div class="image-container">
+      <img src="artwork5.jpg" alt="Artwork 5">
+      <button class="delete-btn">✖</button>
+    </div>
+
+    <div class="image-container">
+      <img src="artwork6.jpg" alt="Artwork 6">
+      <button class="delete-btn">✖</button>
+    </div>
+      
+    <div class="image-container">
+      <img src="artwork7.jpg" alt="Artwork 7">
+      <button class="delete-btn">✖</button>
+    </div>
+      
+    <div class="image-container">
+      <img src="artwork8.jpg" alt="Artwork 8">
+      <button class="delete-btn">✖</button>
+    </div>
+      
+    <div class="image-container">
+      <img src="artwork9.jpg" alt="Artwork 9">
+      <button class="delete-btn">✖</button>
+    </div>
+
+    <div class="image-container">
+      <img src="artwork10.jpg" alt="Artwork 10">
+      <button class="delete-btn">✖</button>
+    </div>
+
+    <div class="image-container">
+      <img src="artwork11.jpg" alt="Artwork 11">
+      <button class="delete-btn">✖</button>
+    </div>
+      
   </div>
 
   <!-- Modal for image zoom -->
