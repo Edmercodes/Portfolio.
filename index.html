@@ -205,9 +205,40 @@
     .user-badge.show {
       display: block;
     }
+
+    #darkModeToggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: var(--blue-4);
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: 0.3s;
+      z-index: 99;
+    }
+
+    #darkModeToggle:hover {
+      background-color: var(--blue-5);
+    }
+
+    body.dark-mode #darkModeToggle {
+      background-color: #666;
+    }
+
+    body.dark-mode #darkModeToggle:hover {
+      background-color: #777;
+    }
   </style>
 </head>
 <body>
+  <!-- Dark Mode Toggle -->
+  <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
+
   <!-- Authentication Modal -->
   <div class="auth-modal" id="authModal">
     <div class="auth-container">

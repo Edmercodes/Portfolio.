@@ -174,10 +174,15 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ===== Dark Mode Toggle =====
+  // Load dark mode preference on all pages
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+  }
+
+  // Set up toggle button if it exists (only on homepage)
   const darkModeToggle = document.getElementById('darkModeToggle');
   if (darkModeToggle) {
     if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark-mode');
       darkModeToggle.textContent = '☀️';
     }
 
