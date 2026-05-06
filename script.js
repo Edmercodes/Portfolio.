@@ -309,8 +309,8 @@ document.addEventListener('DOMContentLoaded', function() {
     deleteBtn.textContent = '🗑️';
     deleteBtn.className = 'delete-btn';
     deleteBtn.style.position = 'absolute';
-    deleteBtn.style.top = '50px';
-    deleteBtn.style.right = '10px';
+    deleteBtn.style.top = '10px';
+    deleteBtn.style.right = '50px';
     deleteBtn.style.background = 'rgba(255, 59, 48, 0.9)';
     deleteBtn.style.color = 'white';
     deleteBtn.style.border = 'none';
