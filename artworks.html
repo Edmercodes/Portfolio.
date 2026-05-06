@@ -129,6 +129,81 @@
       display: none;
     }
 
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #ffffff;
+    }
+
+    body.dark-mode h2 {
+      color: #64b5f6;
+    }
+
+    body.dark-mode .gallery img {
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+    }
+
+    body.dark-mode .image-container img {
+      box-shadow: 0 0 10px rgba(100, 181, 246, 0.2);
+    }
+
+    body.dark-mode .control-btn {
+      background-color: #333333;
+      color: #ffffff;
+    }
+
+    body.dark-mode .control-btn:hover {
+      background-color: #444444;
+    }
+
+    body.dark-mode .back-button {
+      background-color: #333333;
+    }
+
+    body.dark-mode .back-button:hover {
+      background-color: #444444;
+    }
+
+    body.dark-mode .modal {
+      background-color: rgba(0, 0, 0, 0.95);
+    }
+
+    body.dark-mode .user-info {
+      background-color: #333333;
+    }
+
+    body.dark-mode .delete-btn {
+      background-color: rgba(255, 59, 48, 0.85);
+    }
+
+    #darkModeToggle {
+      position: fixed;
+      top: 20px;
+      right: 100px;
+      background-color: var(--blue-4);
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: 0.3s;
+      z-index: 99;
+    }
+
+    #darkModeToggle:hover {
+      background-color: var(--blue-5);
+    }
+
+    body.dark-mode #darkModeToggle {
+      background-color: #666;
+    }
+
+    body.dark-mode #darkModeToggle:hover {
+      background-color: #777;
+    }
+
     /* User info bar */
     .user-info {
       position: fixed;
@@ -206,7 +281,8 @@
   </style>
 </head>
 <body>
-  
+  <!-- Dark Mode Toggle -->
+  <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
 
   <h2>🎨 My Artworks</h2>
 

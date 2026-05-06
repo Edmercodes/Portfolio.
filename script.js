@@ -169,8 +169,24 @@ document.addEventListener('DOMContentLoaded', function() {
     logoutBtnArtworks.onclick = function() {
       localStorage.removeItem('userRole');
       userRole = 'guest';
-      location.reload(); // Reload to update all button visibilities
+      location.reload();
     };
+  }
+
+  // ===== Dark Mode Toggle =====
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  if (darkModeToggle) {
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.textContent = '☀️';
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      darkModeToggle.textContent = isDark ? '☀️' : '🌙';
+    });
   }
 
   // ===== Image Zoom & Gallery Functionality =====
@@ -212,6 +228,79 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
+
+  // Load images from API
+  function loadImagesFromAPI() {
+    fetch(API_BASE + '/api/images')
+      .then(res => res.json())
+      .then(images => {
+        gallery.innerHTML = ''; // Clear existing
+        images.forEach((imgData, index) => {
+          const container = document.createElement('div');
+          container.className = 'image-container';
+          if (userRole === 'admin') container.classList.add('admin');
+          container.style.position = 'relative';
+          container.style.display = 'inline-block';
+
+          const img = document.createElement('img');
+          img.src = API_BASE + '/uploads/' + imgData.filename;
+          img.alt = imgData.original_name;
+          img.style.maxWidth = '100%';
+          img.style.height = 'auto';
+          img.style.maxHeight = '400px';
+          img.style.borderRadius = '8px';
+          img.style.boxShadow = '0 0 15px rgba(0, 0, 0, 0.15)';
+          img.style.cursor = 'pointer';
+
+          addZoomFunctionality(img);
+          container.appendChild(img);
+          gallery.appendChild(container);
+
+          addDownloadFunctionality(img, index, container);
+          addDeleteFunctionality(container, imgData.id);
+        });
+      })
+      .catch(err => console.error('Failed to load images:', err));
+  }
+
+  // Add delete functionality for API images
+  function addDeleteFunctionality(container, imageId) {
+    const deleteBtn = container.querySelector('.delete-btn');
+    if (!deleteBtn) {
+      const btn = document.createElement('button');
+      btn.textContent = '✖';
+      btn.className = 'delete-btn';
+      btn.style.position = 'absolute';
+      btn.style.top = '8px';
+      btn.style.left = '8px';
+      btn.style.background = 'rgba(255, 59, 48, 0.9)';
+      btn.style.color = 'white';
+      btn.style.border = 'none';
+      btn.style.borderRadius = '50%';
+      btn.style.width = '30px';
+      btn.style.height = '30px';
+      btn.style.cursor = 'pointer';
+      btn.style.display = userRole === 'admin' ? '' : 'none';
+      btn.style.zIndex = '10';
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (confirm('Are you sure you want to delete this image?')) {
+          fetch(API_BASE + '/api/images/' + imageId, { method: 'DELETE' })
+            .then(res => res.json())
+            .then(() => container.remove())
+            .catch(err => alert('Delete failed: ' + err.message));
+        }
+      });
+
+      container.appendChild(btn);
+    }
+  }
+
+  // Load API images on page load if server is available
+  if (userInfo) {
+    loadImagesFromAPI();
+  }
 
   // Close modal
   closeBtn.addEventListener('click', function() {
@@ -284,6 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Upload functionality
   const uploadInput = document.getElementById('upload-input');
+  const API_BASE = 'http://localhost:3000';
 
   uploadBtn.addEventListener('click', function() {
     uploadInput.click();
@@ -294,29 +384,47 @@ document.addEventListener('DOMContentLoaded', function() {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          const img = document.createElement('img');
-          img.src = event.target.result;
-          img.alt = file.name;
-          img.style.maxWidth = '100%';
-          img.style.height = 'auto';
-          img.style.maxHeight = '400px';
-          img.style.borderRadius = '8px';
-          img.style.boxShadow = '0 0 15px rgba(0, 0, 0, 0.15)';
-          img.style.cursor = 'pointer';
+        const formData = new FormData();
+        formData.append('image', file);
 
-          // Add zoom functionality to new image
-          addZoomFunctionality(img);
+        fetch(API_BASE + '/api/upload', {
+          method: 'POST',
+          body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            alert('Upload failed: ' + data.error);
+          } else {
+            const img = document.createElement('img');
+            img.src = API_BASE + '/uploads/' + data.filename;
+            img.alt = data.original_name;
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            img.style.maxHeight = '400px';
+            img.style.borderRadius = '8px';
+            img.style.boxShadow = '0 0 15px rgba(0, 0, 0, 0.15)';
+            img.style.cursor = 'pointer';
 
-          gallery.appendChild(img);
+            addZoomFunctionality(img);
+            
+            const container = document.createElement('div');
+            container.className = 'image-container';
+            if (userRole === 'admin') container.classList.add('admin');
+            container.style.position = 'relative';
+            container.style.display = 'inline-block';
+            
+            container.appendChild(img);
+            gallery.appendChild(container);
 
-          // Add download functionality to new image
-          addDownloadFunctionality(img, gallery.children.length - 1);
-        };
-        reader.readAsDataURL(file);
+            addDownloadFunctionality(img, -1, container);
+            addDeleteFunctionality(container, data.id);
+          }
+        })
+        .catch(err => alert('Upload error: ' + err.message));
       }
     }
+    uploadInput.value = '';
   });
 
   // Function to add download functionality to an image
