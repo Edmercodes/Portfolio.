@@ -124,6 +124,28 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   }
 
+  // ===== Artworks Page Specific =====
+  const userInfo = document.getElementById('userInfo');
+  const roleDisplay = document.getElementById('roleDisplay');
+  const logoutBtnArtworks = document.getElementById('logoutBtn');
+  const uploadBtn = document.getElementById('upload-btn');
+
+  if (userInfo && roleDisplay && logoutBtnArtworks) {
+    if (savedRole) {
+      userInfo.style.display = 'flex';
+      roleDisplay.textContent = userRole === 'admin' ? 'Admin' : 'Guest';
+    }
+    if (uploadBtn) {
+      uploadBtn.style.display = userRole === 'admin' ? 'block' : 'none';
+    }
+
+    logoutBtnArtworks.onclick = function() {
+      sessionStorage.removeItem('userRole');
+      userRole = 'guest';
+      location.reload(); // Reload to update all button visibilities
+    };
+  }
+
   // ===== Image Zoom & Gallery Functionality =====
   const modal = document.getElementById('imageModal');
   const modalImg = document.getElementById('modalImage');
@@ -218,7 +240,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Upload functionality
-  const uploadBtn = document.getElementById('upload-btn');
   const uploadInput = document.getElementById('upload-input');
 
   uploadBtn.addEventListener('click', function() {
@@ -297,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
     deleteBtn.style.width = '30px';
     deleteBtn.style.height = '30px';
     deleteBtn.style.cursor = 'pointer';
-    deleteBtn.style.display = userRole === 'admin' ? 'none' : 'none';
+    deleteBtn.style.display = userRole === 'admin' ? 'block' : 'none';
     deleteBtn.style.zIndex = '10';
 
     deleteBtn.addEventListener('click', function(e) {
@@ -319,14 +340,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show buttons on hover
     wrapper.addEventListener('mouseenter', function() {
       downloadBtn.style.display = 'block';
-      if (userRole === 'admin') {
-        deleteBtn.style.display = 'block';
-      }
     });
 
     wrapper.addEventListener('mouseleave', function() {
       downloadBtn.style.display = 'none';
-      deleteBtn.style.display = 'none';
     });
   }
 
