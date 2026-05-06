@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('userRole', 'admin');
         showUserView();
       } else {
-        alert('Incorrect password. Use 0000 for admin.');
+        alert('Incorrect password. Please try again.');
         passwordInput.value = '';
         passwordInput.focus();
       }
