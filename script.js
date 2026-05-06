@@ -34,137 +34,92 @@ document.querySelectorAll(".nav a").forEach(link => {
 document.addEventListener('DOMContentLoaded', function() {
   // ===== Authentication System =====
   
-  // Check if we're on the artworks page
+  const authModal = document.getElementById('authModal');
   const loginModal = document.getElementById('loginModal');
-  if (!loginModal) {
-    console.log('Not on artworks page, skipping auth');
-    return;
-  }
-
-  console.log('Auth system initializing...');
-
   let userRole = 'guest';
   const ADMIN_PASSWORD = '0000';
   const savedRole = sessionStorage.getItem('userRole');
-  
-  // Get all elements
-  const guestBtn = document.getElementById('guestBtn');
-  const adminBtn = document.getElementById('adminBtn');
-  const passwordSection = document.getElementById('passwordSection');
-  const passwordInput = document.getElementById('passwordInput');
-  const submitPasswordBtn = document.getElementById('submitPasswordBtn');
-  const cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
-  const userInfo = document.getElementById('userInfo');
-  const roleDisplay = document.getElementById('roleDisplay');
-  const logoutBtn = document.getElementById('logoutBtn');
-  const uploadBtn = document.getElementById('upload-btn');
 
-  // Debug: log elements
-  console.log('Elements found:', {
-    loginModal: !!loginModal,
-    guestBtn: !!guestBtn,
-    adminBtn: !!adminBtn
-  });
+  if (authModal) {
+    const guestBtn = document.getElementById('guestAuthBtn');
+    const adminBtn = document.getElementById('adminAuthBtn');
+    const passwordPrompt = document.getElementById('passwordPrompt');
+    const passwordInput = document.getElementById('authPassword');
+    const confirmPasswordBtn = document.getElementById('confirmPasswordBtn');
+    const cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
+    const userBadge = document.getElementById('userBadge');
+    const roleText = document.getElementById('roleText');
+    const logoutBtn = document.getElementById('logoutBtn');
 
-  function showMainContent() {
-    loginModal.style.display = 'none';
-    userInfo.style.display = 'flex';
-    roleDisplay.textContent = userRole === 'admin' ? 'Admin' : 'Guest';
-    
-    if (userRole === 'admin') {
-      uploadBtn.style.display = 'block';
-    } else {
-      uploadBtn.style.display = 'none';
+    function showUserView() {
+      authModal.classList.add('hidden');
+      userBadge.classList.add('show');
+      roleText.textContent = userRole === 'admin' ? 'Admin' : 'Guest';
+      passwordPrompt.classList.remove('show');
+      passwordInput.value = '';
     }
-    console.log('Main content shown, role:', userRole);
-  }
 
-  // If already logged in, show main content
-  if (savedRole) {
-    console.log('Found saved role:', savedRole);
-    userRole = savedRole;
-    showMainContent();
-  } else {
-    console.log('No saved role, showing login modal');
-    loginModal.style.display = 'flex';
-  }
+    function showAuthView() {
+      authModal.classList.remove('hidden');
+      userBadge.classList.remove('show');
+      passwordPrompt.classList.remove('show');
+      passwordInput.value = '';
+    }
 
-  // Guest button click handler
-  if (guestBtn) {
+    if (savedRole) {
+      userRole = savedRole;
+      showUserView();
+    } else {
+      showAuthView();
+    }
+
     guestBtn.onclick = function(e) {
       e.preventDefault();
-      console.log('Guest clicked!');
       userRole = 'guest';
       sessionStorage.setItem('userRole', 'guest');
-      showMainContent();
+      showUserView();
       return false;
     };
-  }
 
-  // Admin button click handler
-  if (adminBtn) {
     adminBtn.onclick = function(e) {
       e.preventDefault();
-      console.log('Admin clicked!');
-      passwordSection.classList.add('active');
+      passwordPrompt.classList.add('show');
       passwordInput.focus();
       return false;
     };
-  }
 
-  // Submit password
-  if (submitPasswordBtn) {
-    submitPasswordBtn.onclick = function(e) {
+    confirmPasswordBtn.onclick = function(e) {
       e.preventDefault();
-      const pwd = passwordInput.value;
-      console.log('Password submitted:', pwd === ADMIN_PASSWORD ? 'CORRECT' : 'WRONG');
-      
-      if (pwd === ADMIN_PASSWORD) {
+      if (passwordInput.value === ADMIN_PASSWORD) {
         userRole = 'admin';
         sessionStorage.setItem('userRole', 'admin');
-        passwordSection.classList.remove('active');
-        passwordInput.value = '';
-        showMainContent();
+        showUserView();
       } else {
-        alert('Incorrect password! Try: 0000');
+        alert('Incorrect password. Use 0000 for admin.');
         passwordInput.value = '';
         passwordInput.focus();
       }
       return false;
     };
-  }
 
-  // Cancel password
-  if (cancelPasswordBtn) {
     cancelPasswordBtn.onclick = function(e) {
       e.preventDefault();
-      passwordSection.classList.remove('active');
+      passwordPrompt.classList.remove('show');
       passwordInput.value = '';
       return false;
     };
-  }
 
-  // Enter key in password
-  if (passwordInput) {
     passwordInput.onkeypress = function(e) {
       if (e.key === 'Enter') {
-        submitPasswordBtn.click();
+        confirmPasswordBtn.click();
       }
     };
-  }
 
-  // Logout
-  if (logoutBtn) {
     logoutBtn.onclick = function(e) {
       e.preventDefault();
-      console.log('Logout clicked');
       sessionStorage.removeItem('userRole');
       userRole = 'guest';
-      loginModal.style.display = 'flex';
-      userInfo.style.display = 'none';
-      uploadBtn.style.display = 'none';
-      passwordInput.value = '';
-      passwordSection.classList.remove('active');
+      showAuthView();
       return false;
     };
   }
