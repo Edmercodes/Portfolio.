@@ -39,6 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
   let userRole = 'guest';
   const ADMIN_PASSWORD = '0000';
   const savedRole = localStorage.getItem('userRole');
+  const urlParams = new URLSearchParams(window.location.search);
+  const pageView = urlParams.get('view');
+  const effectiveRole = pageView === 'admin' || pageView === 'guest' ? pageView : savedRole || 'guest';
+  userRole = effectiveRole;
 
   if (authModal) {
     const guestBtn = document.getElementById('guestAuthBtn');
