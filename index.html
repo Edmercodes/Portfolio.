@@ -61,9 +61,178 @@
     footer {
       font-size: 0.9rem;
     }
+
+    /* Auth Modal Styles */
+    .auth-modal {
+      display: flex;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .auth-modal.hidden {
+      display: none;
+    }
+
+    .auth-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 150, 255, 0.5);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .auth-container h2 {
+      color: var(--blue-5);
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .auth-btn {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .auth-btn.guest {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .auth-btn.guest:hover {
+      background-color: #5a6268;
+    }
+
+    .auth-btn.admin {
+      background-color: var(--blue-4);
+      color: white;
+    }
+
+    .auth-btn.admin:hover {
+      background-color: var(--blue-5);
+    }
+
+    .password-prompt {
+      display: none;
+      margin-top: 1rem;
+    }
+
+    .password-prompt.show {
+      display: block;
+    }
+
+    .password-prompt input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 2px solid var(--blue-3);
+      border-radius: 5px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .password-prompt input:focus {
+      outline: none;
+      border-color: var(--blue-5);
+      box-shadow: 0 0 5px rgba(0, 150, 255, 0.3);
+    }
+
+    .password-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .password-actions button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .password-actions .confirm-btn {
+      background-color: var(--blue-4);
+      color: white;
+    }
+
+    .password-actions .confirm-btn:hover {
+      background-color: var(--blue-5);
+    }
+
+    .password-actions .cancel-btn {
+      background-color: #ddd;
+      color: #333;
+    }
+
+    .password-actions .cancel-btn:hover {
+      background-color: #bbb;
+    }
+
+    .user-badge {
+      display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: var(--blue-4);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      z-index: 100;
+      font-weight: bold;
+    }
+
+    .user-badge.show {
+      display: block;
+    }
   </style>
 </head>
 <body>
+  <!-- Authentication Modal -->
+  <div class="auth-modal" id="authModal">
+    <div class="auth-container">
+      <h2>🎨 Welcome to Portfolio</h2>
+      <p>Select your role:</p>
+      <div class="auth-buttons">
+        <button class="auth-btn guest" id="guestAuthBtn" type="button">👤 Guest</button>
+        <button class="auth-btn admin" id="adminAuthBtn" type="button">🔐 Admin</button>
+      </div>
+      <div class="password-prompt" id="passwordPrompt">
+        <input type="password" id="authPassword" placeholder="Enter admin password" autocomplete="off">
+        <div class="password-actions">
+          <button class="confirm-btn" id="confirmPasswordBtn" type="button">Confirm</button>
+          <button class="cancel-btn" id="cancelPasswordBtn" type="button">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Badge -->
+  <div class="user-badge" id="userBadge">
+    <span id="roleText">Loading...</span>
+    <button id="logoutBtn" style="background: rgba(255,255,255,0.3); border: none; color: white; margin-left: 10px; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-weight: bold;">Logout</button>
+  </div>
+
   <header>
     <div class="photo-border">
       <img src="edbarong.jpg" alt="Your Photo">
